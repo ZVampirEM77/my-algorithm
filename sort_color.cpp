@@ -23,3 +23,26 @@ public:
         nums.insert(nums.begin() + num_0 + num_1, num_2, 2);
     }
 };
+
+
+
+class Solution {
+public:
+    void sortColors(vector<int>& nums) {
+        int less = 0;
+        int greater = nums.size() - 1;
+
+        for (int i = 0; i <= greater;)
+        {
+            if (nums[i] < 1)
+            {
+                std::swap(nums[less++], nums[i++]);
+            } else if (nums[i] > 1)
+            {
+                std::swap(nums[greater--], nums[i]);
+            } else {
+                i++;
+            }
+        }
+    }
+};
