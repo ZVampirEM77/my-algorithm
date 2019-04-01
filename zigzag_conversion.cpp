@@ -37,3 +37,40 @@ public:
         return res;
     }
 };
+
+
+class Solution {
+public:
+    string convert(string s, int numRows) {
+        string *s_array = new string[numRows];
+        string res;
+        int row_num = 1;
+        bool increase = true;
+
+        if (numRows == 1) {
+            return s;
+        }
+
+        for (int i = 0; i < s.length(); i++) {
+            if (row_num == 1) {
+                increase = true;
+            } else if (row_num == numRows) {
+                increase = false;
+            }
+
+            s_array[row_num - 1].append(1, s[i]);
+
+            if (increase) {
+                row_num ++;
+            } else {
+                row_num --;
+            }
+        }
+
+        for (int j = 0; j < numRows; j++) {
+            res.append(s_array[j]);
+        }
+
+        return res;
+    }
+};
