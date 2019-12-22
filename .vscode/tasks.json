@@ -1,0 +1,22 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "VampirEM Build with Clang",
+        "type": "shell",
+        "command": "g++",
+        "args": [
+          "-std=c++17",
+          "-stdlib=libc++",
+          "${workspaceFolder}/algorithm/search/binary_search_last_equal.cpp",
+          "-g",
+          "-o",
+          "${workspaceFolder}/algorithm/search/binary_search_last_equal"
+        ],
+        "group": {
+          "kind": "build",
+          "isDefault": true
+        }
+      }
+    ]
+  }
