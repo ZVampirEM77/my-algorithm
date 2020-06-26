@@ -5,17 +5,17 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "(lldb) launch",
-            "type": "lldb",
+            "name": "clang++ - 生成和调试活动文件",
+            "type": "cppdbg",
             "request": "launch",
-            "preLaunchTask": "VampirEM Build with Clang",
-            "program": "${workspaceFolder}/algorithm/search/binary_search_last_equal",
+            "program": "${fileDirname}/${fileBasenameNoExtension}",
             "args": [],
-//           "stopAtEntry": false,
+            "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
-//          "environment": [],
-//           "externalConsole": false,
-//           "MIMode": "lldb"
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "lldb",
+            "preLaunchTask": "C/C++: clang++ build active file"
         }
     ]
 }

@@ -1,22 +1,49 @@
 {
     "version": "2.0.0",
     "tasks": [
-      {
-        "label": "VampirEM Build with Clang",
-        "type": "shell",
-        "command": "g++",
-        "args": [
-          "-std=c++17",
-          "-stdlib=libc++",
-          "${workspaceFolder}/algorithm/search/binary_search_last_equal.cpp",
-          "-g",
-          "-o",
-          "${workspaceFolder}/algorithm/search/binary_search_last_equal"
-        ],
-        "group": {
-          "kind": "build",
-          "isDefault": true
+        {
+            "type": "shell",
+            "label": "clang++ build active file",
+            "command": "/usr/bin/clang++",
+            "args": [
+                "-std=c++17",
+                "-stdlib=libc++",
+                "-g",
+                "${file}",
+                "-o",
+                "${fileDirname}/${fileBasenameNoExtension}"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "type": "shell",
+            "label": "C/C++: clang++ build active file",
+            "command": "/usr/bin/clang++",
+            "args": [
+                "-g",
+                "${file}",
+                "-o",
+                "${fileDirname}/${fileBasenameNoExtension}"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
         }
-      }
     ]
-  }
+}
