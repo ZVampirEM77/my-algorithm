@@ -11,10 +11,8 @@ struct ListNode {
 class Solution {
 public:
     ListNode *detectCycle(ListNode *head) {
-        if (head == nullptr || head->next) {
-            return nullptr;
-        }
-
+        if (head == nullptr || head->next == nullptr) {
+            return nullptr; //        } //
         std::unordered_set<ListNode *> ptr_set;
         ListNode * cur_node = head;
 
@@ -31,15 +29,28 @@ public:
 
         return nullptr;
     }
+
+    ListNode *detectCycle(ListNode *head) {
+        if (head == nullptr || head->next == nullptr) {
+            return nullptr;
+        }
+
+        ListNode * slow = head;
+        ListNode * fast = head;
+        ListNode * start_node = head;
+        while (fast->next && fast->next->next) {
+            slow = slow->next;
+            fast = fast->next->next;
+            if (fast == slow) {
+                while (start_node != slow) {
+                    start_node = start_node->next;
+                    slow = slow->next;
+                }
+
+                return start_node;
+            }
+        }
+
+        return NULL;
+    }
 };
-
-int main() {
-  ListNode * list_ins = CreateCycledLinkedList<ListNode>(7, 1);
-  ListNode * cur = list_ins;
-
-  Solution * solution_ins = new Solution();
-  ListNode * cycle_start_node = solution_ins->detectCycle(list_ins);
-  std::cout << "cycle start from node " << cycle_start_node->val << std::endl;
-
-  return 0;
-}
