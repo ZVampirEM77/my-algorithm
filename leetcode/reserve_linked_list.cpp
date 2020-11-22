@@ -30,4 +30,16 @@ public:
         
         return pre_node;
     }
+
+    ListNode* reverseList2(ListNode *head) {
+        if (head == nullptr || head->next == nullptr) {
+            return head;
+        }
+
+        ListNode *res = reverseList2(head->next);
+        head->next->next = head;
+        head->next = nullptr;
+
+        return res;
+    }
 };
