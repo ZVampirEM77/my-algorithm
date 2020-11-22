@@ -42,7 +42,6 @@ public:
 
         ListNode * cur_node = head;
         ListNode * pre_node = new ListNode();
-        pre_node->next = head;
         ListNode * new_head = cur_node->next;
 
         while(cur_node != nullptr && cur_node->next != nullptr) {
@@ -56,5 +55,17 @@ public:
         }
 
         return new_head;
+    }
+
+    ListNode* swapPairs(ListNode* head) {
+        if (head == nullptr || head->next == nullptr) {
+            return head;
+        }
+
+        ListNode *nn_node = swapPairs(head->next->next);
+        ListNode *res = head->next;
+        head->next->next = head;
+        head->next = nn_node;
+        return res;
     }
 };
