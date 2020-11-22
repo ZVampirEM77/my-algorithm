@@ -56,6 +56,7 @@ public:
   ListNode* reverseKGroup2(ListNode* head, int k) {
     ListNode * sentry_node = new ListNode(0);
     ListNode * pre_node = sentry_node;
+    // so we can access cur_node->next directly
     ListNode * cur_node = pre_node;
     sentry_node->next = head;
     int len = 0;
@@ -66,6 +67,7 @@ public:
     }
 
     while (len >= k) {
+      // assgin cur_node to head
       cur_node = pre_node->next;
       for (int i = 1; i < k; i++) {
         ListNode * next_node = cur_node->next;
@@ -79,5 +81,34 @@ public:
     }
 
     return sentry_node->next;
+  }
+
+  ListNode * reverseKGroup3(ListNode * head, int k) {
+    if (head == nullptr || head->next == nullptr || k == 1) {
+        return head;
+    }
+
+    ListNode *sub_list_head = head;
+    int sub_list_length = k;
+    while (--sub_list_length && sub_list_head->next != nullptr) {
+        sub_list_head = sub_list_head->next;
+    }
+
+    if (sub_list_length != 0) {
+        return head;
+    }
+
+    ListNode * pre_node = ReverseNodeinKGroup(sub_list_head->next, k);
+    ListNode * cur_node = head;
+    ListNode * next_node = nullptr;
+
+    for (int i = 0; i < k; i++) {
+        next_node = cur_node->next;
+        cur_node->next = pre_node;
+        pre_node = cur_node;
+        cur_node = next_node;
+    }
+
+    return pre_node;
   }
 };
