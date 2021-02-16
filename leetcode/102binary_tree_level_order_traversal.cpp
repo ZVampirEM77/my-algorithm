@@ -40,3 +40,24 @@ std::vector<std::vector<int>> levelOrder(TreeNode* root) {
 
     return res_vec;
 }
+
+std::vector<std::vector<int>> res_vec;
+
+void buildVector(TreeNode *node, uint32_t depth) {
+    if (node == nullptr) {
+        return;
+    }
+
+    if (res_vec.size() == depth) {
+        res_vec.push_back(std::vector<int>());
+    }
+
+    res_vec[depth].push_back(node->val);
+    buildVector(node->left, depth + 1);
+    buildVector(node->right, depth + 1);
+}
+
+std::vector<std::vector<int>> levelOrder(TreeNode* root) {
+    buildVector(root, 0);
+    return res_vec;
+}
