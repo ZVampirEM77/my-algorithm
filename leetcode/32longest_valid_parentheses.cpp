@@ -65,6 +65,74 @@
         return max_len;
     }
 
+    int longestValidParentheses(std::string s) {
+        int max_len = 0;
+        std::stack<int> index_stack;
+        index_stack.push(-1);
+        for (int i = 0; i < s.length(); i++) {
+            if (s[i] == '(') {
+                index_stack.push(i);
+            } else {
+                index_stack.pop();
+                // if index_stack is empty, the palindrome is valid
+                if (index_stack.empty()) {
+                    index_stack.push(i);
+                    continue;
+                }
+
+                int pair_index = index_stack.top();
+                if (max_len < i - pair_index) {
+                    max_len = i - pair_index;
+                }
+            }
+        }
+
+        return max_len;
+    }
+
+    int longestValidParentheses(std::string s) {
+        int left = 0;
+        int right = 0;
+        int max_len = 0;
+        for (int i = 0; i < s.length(); i++) {
+            if (s[i] == '(') {
+                left++;
+            } else {
+                right++;
+            }
+
+            if (left == right) {
+                if (max_len < 2 * right) {
+                    max_len = 2 * right;
+                }
+            } else if (right > left) {
+                left = 0;
+                right = 0;
+            }
+        }
+
+        left = 0;
+        right = 0;
+        for (int i = s.length() - 1; i >= 0; i--) {
+            if (s[i] == '(') {
+                left++;
+            } else {
+                right++;
+            }
+
+            if (left == right) {
+                if (max_len < 2 * left) {
+                    max_len = 2 * left;
+                }
+            } else if (left > right) {
+                left = 0;
+                right = 0;
+            }
+        }
+
+        return max_len;
+    }
+
     int main() {
         std::string test_str = ")()())";
         std::cout << longestValidParentheses(test_str) << std::endl;
